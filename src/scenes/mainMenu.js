@@ -1,4 +1,5 @@
 import k from "../kaplayCtx";
+import { makeSonic } from "../entities/sonic";
 
 export default function mainMenu(){
     if(!k.getData("best-score")) {
@@ -19,6 +20,8 @@ export default function mainMenu(){
         k.add([k.sprite("platforms"), k.pos(platformsWidth,450), k.scale(4)])
     ];
 
+    makeSonic(k.vec2(200, 745));
+
     //function that run every frame -? 60 frames per sec
     k.onUpdate(() => {
         if (bgPieces[1].pos.x < 0) {
@@ -28,6 +31,15 @@ export default function mainMenu(){
     
         bgPieces[0].move(-100, 0);
         bgPieces[1].moveTo(bgPieces[0].pos.x + bgPieceWidth * 2, 0);
+
+
+        if (platforms[1].pos.x < 0){
+            platforms[0].moveTo(platforms[1].pos.x + platforms[1].width *4, 450);
+            platforms.push(platforms.shift());
+        }
+
+        platforms[0].move(-4000,0);
+        platforms[1].moveTo(platforms[0].pos.x + platforms[1].width *4, 450);
     });
 }
 
