@@ -24,7 +24,13 @@ export default function mainMenu(){
         k.text("SONIC RING RUN", { font: "mania", size: 96 }),
         k.anchor("center"),
         k.pos(k.center().x, 200),
-      ]);
+    ]);
+
+    k.add([
+        k.text("Press Space/Click to Play", {font: "mania", size: 32}),
+        k.anchor("center"),
+        k.pos(k.center().x, k.center().y -200 )
+    ]);
     
     makeSonic(k.vec2(200, 745));
 
