@@ -5,6 +5,7 @@ import { makeRing } from "../entities/ring";
 
 export default function game(){
     k.setGravity(3100);
+    const citySfx = k.play("city", {volume: 0.2, loop: true});
 
     const bgPieceWidth = 1920;
     const bgPieces = [
@@ -50,7 +51,7 @@ export default function game(){
         }
         k.play("hurt", {volume: 0.5});
         k.setData("current-score", score);
-        k.go("gameover");
+        k.go("gameover", citySfx);
     });
     sonic.onCollide("ring", (ring)=> {
         k.play("ring", {volume: 0.5});
