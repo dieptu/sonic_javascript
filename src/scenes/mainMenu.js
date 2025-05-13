@@ -20,6 +20,12 @@ export default function mainMenu(){
         k.add([k.sprite("platforms"), k.pos(platformsWidth,450), k.scale(4)])
     ];
 
+    k.add([
+        k.text("SONIC RING RUN", { font: "mania", size: 96 }),
+        k.anchor("center"),
+        k.pos(k.center().x, 200),
+      ]);
+    
     makeSonic(k.vec2(200, 745));
 
     //function that run every frame -? 60 frames per sec

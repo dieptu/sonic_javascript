@@ -45,7 +45,7 @@ k.loadSprite("motobug", "graphics/motobug.png", {
         },
     },
 });
-k.loadFont("mania", "fonts.mania.ttf");
+k.loadFont("mania", "fonts/mania.ttf");
 
 k.loadSound("destroy", "sounds/Destroy.wav");
 k.loadSound("hurt", "sounds/Hurt.wav");
@@ -62,3 +62,5 @@ k.scene("game", ()=>{});
 k.scene("gameover", ()=>{});
 
 k.go("main-menu");
+
+//59:17
