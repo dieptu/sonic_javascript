@@ -22,6 +22,12 @@ export default function game(){
     let score = 0;
     let scoreMultiplier = 0;
 
+    const scoreText = k.add([
+        k.text("SCORE: 0" , {font: "mania", size: 72}),
+        k.pos(20,20),
+
+    ]);
+
     const sonic = makeSonic(k.vec2(200,745));
     sonic.setControls();
     sonic.setEvents();
@@ -32,20 +38,29 @@ export default function game(){
             k.destroy(enemy);
             sonic.play("jump");
             sonic.jump();
+            scoreMultiplier += 1;
+            score += 10 * scoreMultiplier;
+            scoreText.text = `SCORE: ${score}`;
+            if (scoreMultiplier === 1) sonic.ringCollectUI.text = "+10";
+            if (scoreMultiplier > 1) sonic.ringCollectUI.text = `x${scoreMultiplier}`;
+            k.wait(1, () => {
+                sonic.ringCollectUI.text = "";
+            });
             return;
         }
         k.play("hurt", {volume: 0.5});
+        k.setData("current-score", score);
         k.go("gameover");
     });
     sonic.onCollide("ring", (ring)=> {
         k.play("ring", {volume: 0.5});
         k.destroy(ring);
         score++;
-        
-
-        
-        
-       
+        scoreText.text = `SCORE: ${score}`;
+        sonic.ringCollectUI.text = "+1";
+        k.wait(1, () => {
+            sonic.ringCollectUI.text = "";
+        });
     });
     
 
@@ -99,6 +114,8 @@ export default function game(){
     ]);
 
     k.onUpdate(() => {
+        if (sonic.isGrounded()) scoreMultiplier = 0;
+
         if (bgPieces[1].pos.x < 0) {
             bgPieces[0].moveTo(bgPieces[1].pos.x + bgPieceWidth * 2, 0);
             bgPieces.push(bgPieces.shift());
